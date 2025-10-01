@@ -1,0 +1,35 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+public class ATMSystemSimulator {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        double balance = 0;
+        double withdraw = 0;
+        try {
+            System.out.print("Enter current balance: ");
+            balance = sc.nextDouble();
+            System.out.print("Enter withdrawal amount: ");
+            withdraw = sc.nextDouble();
+            if (withdraw <= 0) {
+                System.out.println("Withdrawal amount must be positive.");
+            } 
+            else if (withdraw % 100 != 0) {
+                System.out.println("Withdrawal amount must be in multiples of 100.");
+            } 
+            else if (withdraw > balance) {
+                System.out.println("Insufficient balance. Withdrawal failed.");
+            } 
+            else {
+                balance -= withdraw;
+                System.out.println("Withdrawal successful. Remaining balance: " + balance);
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a numeric value.");
+        } finally {
+            
+            if (sc != null) {
+                sc.close();
+            }
+        }
+    }
+}
